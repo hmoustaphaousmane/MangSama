@@ -3,7 +3,15 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  # devise_scope :user do
+  #   authenticated :user do
+  #     root 'mangas#index', as: :authenticated_user
+  #   end
+  
+  #   unauthenticated do
+  #     root 'devise/sessions#new', as: :unauthenticated_user
+  #   end
+  # end
 
   # Routes pour les mangas
   resources :mangas do
