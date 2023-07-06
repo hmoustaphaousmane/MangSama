@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_06_124150) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_06_181550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_124150) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categorizations", force: :cascade do |t|
+    t.bigint "manga_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_categorizations_on_category_id"
+    t.index ["manga_id"], name: "index_categorizations_on_manga_id"
   end
 
   create_table "chapters", force: :cascade do |t|
@@ -100,6 +109,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_124150) do
 
   add_foreign_key "appreciations", "mangas"
   add_foreign_key "appreciations", "users"
+  add_foreign_key "categorizations", "categories"
+  add_foreign_key "categorizations", "mangas"
   add_foreign_key "chapters", "tomes"
   add_foreign_key "comments", "mangas"
   add_foreign_key "comments", "users"

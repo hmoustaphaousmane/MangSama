@@ -1,5 +1,6 @@
 class Manga < ApplicationRecord
-  belongs_to :category
+  has_many :categorizations
+  has_many :categories, through: :categorizations
   has_many :tomes
   has_many :comments
   has_many :appreciations
