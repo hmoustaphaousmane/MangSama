@@ -1,4 +1,4 @@
-<nav class="navbar navbar navbar-expand navbar-dark bg-primary sticky-top">
+<nav class="navbar navbar-expand navbar-dark bg-primary sticky-top">
   <div class="container-fluid">
     <%= link_to "MangaSama", "#", :class => "navbar-brand"%>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
             <li><%= link_to "View Profile", current_user, class: "dropdown-item" %></li>
             <li>
               <%= form_tag destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-              <%= submit_tag 'Log out' %>
+                <%= submit_tag 'Log out' %>
               <% end %>
             </li>
           </ul>

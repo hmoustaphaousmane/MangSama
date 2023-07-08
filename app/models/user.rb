@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :mangas, through: :favorites
   has_many :comments
+
+  has_one_attached :profile_photo
 end 
