@@ -1,0 +1,15 @@
+<% if @results %>
+  <% @results.each do |manga| %>
+    <h3><%= manga['title'] %></h3>
+    <p><%= manga['synopsis'] %></p>
+    <img src="<%= manga['images']['jpg']['image_url'] %>">
+    <p>Score : <%= manga['score'] %></p>
+    <hr>
+  <% end %>
+<% else %>
+  <p>Aucun résultat trouvé.</p>
+<% end %>
+
+
+
+

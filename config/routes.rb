@@ -15,11 +15,7 @@ Rails.application.routes.draw do
 
   # Routes pour les mangas
   resources :mangas do
-    resources :tomes, only: [:index, :show] do
-      resources :chapters, only: [:index, :show] do
-        resources :images, only: [:index, :show]
-      end
-    end
+    get 'search', on: :collection
     resources :appreciations, only: [:create, :destroy]
     resources :comments, only: [:index, :create, :destroy]
     resources :favorites, only: [:create, :destroy]

@@ -1,2 +1,0 @@
-class TomesController < ApplicationController
-end

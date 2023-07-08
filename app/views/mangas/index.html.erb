@@ -1,0 +1,17 @@
+<h1>Liste des Mangas</h1>
+
+<ul>
+  <% @manga.each do |manga| %>
+    <li><%= manga.title %></li>
+    <li><%= manga.synopsis %></li>
+    <li><a href="<%= manga.url %>"><%= manga.url %></a></li>
+    <li><img src="<%= manga.cover_image %>"></li>
+  <% end %>
+</ul>
+
+
+<%= form_tag(search_mangas_path, method: :get) do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Rechercher un manga" %>
+  <%= submit_tag "Rechercher" %>
+<% end %>
+
