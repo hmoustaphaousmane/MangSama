@@ -1,7 +1,11 @@
-<h2 class='text-center'>Log in</h2>
+<div class="container">
 
+<h2 class='text-center'>Log in</h2>
 <div class="row">
-<div class="col-md-6 offset-3">
+
+<div class="col-sm-2"></div>
+
+<div class="shadow p-4 mb-5 bg-body rounded col-md-8">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div style="color: red">
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -30,5 +34,7 @@
     </div>
   <% end %>
 
+</div>
+</div>
 </div>
 </div>
