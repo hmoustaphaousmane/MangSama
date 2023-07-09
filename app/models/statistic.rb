@@ -1,3 +1,3 @@
 class Statistic < ApplicationRecord
-  belongs_to :manga
+  has_one :manga
 end
