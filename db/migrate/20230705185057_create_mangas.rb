@@ -1,6 +1,7 @@
 class CreateMangas < ActiveRecord::Migration[7.0]
   def change
     create_table :mangas do |t|
+      t.references :statistic, null: false, foreign_key: true
       t.string :url
       t.string :author_name
       t.string :title

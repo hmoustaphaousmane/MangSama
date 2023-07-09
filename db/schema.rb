@@ -97,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_135756) do
   end
 
   create_table "mangas", force: :cascade do |t|
+    t.bigint "statistic_id", null: false
     t.string "url"
     t.string "author_name"
     t.string "title"
@@ -108,22 +109,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_135756) do
     t.integer "chapters"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["statistic_id"], name: "index_mangas_on_statistic_id"
   end
 
   create_table "statistics", force: :cascade do |t|
-    t.bigint "manga_id", null: false
     t.integer "reading"
+    t.integer "on_hold"
     t.integer "completed"
     t.integer "dropped"
-    t.integer "on_hold"
     t.integer "plan_to_read"
     t.integer "total"
-    t.integer "score"
+    t.float "score"
     t.integer "votes"
-    t.integer "percentage"
+    t.float "percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["manga_id"], name: "index_statistics_on_manga_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -154,5 +154,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_08_135756) do
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "mangas"
   add_foreign_key "favorites", "users"
-  add_foreign_key "statistics", "mangas"
+  add_foreign_key "mangas", "statistics"
 end
