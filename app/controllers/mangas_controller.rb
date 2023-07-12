@@ -2,7 +2,7 @@ require 'uri'
 
 class MangasController < ApplicationController
     def index
-        @manga = Manga.all
+        @mangas = Manga.all
         @results = []
     end
 
@@ -11,6 +11,10 @@ class MangasController < ApplicationController
         @results = search_manga(query)
     end
 
+    def show
+        @manga = Manga.find(params[:id])
+        @characters = @manga.characters.limit(12)
+    end
    
     private
 
