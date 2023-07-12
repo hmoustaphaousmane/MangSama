@@ -2,6 +2,9 @@ require 'uri'
 
 class MangasController < ApplicationController
     def index
+        # Only authorize those who have read privilege on the class Mango to view
+        authorize! :read, Manga
+
         @manga = Manga.all
         @results = []
     end

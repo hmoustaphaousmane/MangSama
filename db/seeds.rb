@@ -148,7 +148,10 @@ end
 
 
 # Appeler la méthode pour effectuer le seed d'un manga spécifique
-seed_manga(21) # Remplacez 21 par l'ID du manga que vous souhaitez seed
+10.times do |i|
+  i += 1
+  seed_manga(i) # Remplacez 21 par l'ID du manga que vous souhaitez seed
+end
 
 # Vous pouvez appeler la méthode seed_manga avec différents ID de manga pour seed plusieurs mangas
 

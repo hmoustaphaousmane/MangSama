@@ -76,3 +76,6 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+# Use cancancan to manage users' roles
+gem 'cancancan'
