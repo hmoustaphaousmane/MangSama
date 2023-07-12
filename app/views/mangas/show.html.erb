@@ -23,12 +23,15 @@
   <div class="row">
     <div class="col">
       <img src="<%= @manga.cover_image %>" class="img-fluid" alt="<%= @manga.title %>"><br>
-       <%= form_with(model: [@manga, Comment.new]) do |form| %>
-        <div class="mb-3">
-          <%= form.text_area :content, class: "form-control", placeholder: "Ajouter un commentaire" %>
-        </div>
-        <%= form.submit "Envoyer", class: "btn btn-primary" %>
-      <% end %>
+      <div class="btn-group" role="group" aria-label="Actions">
+        <%= button_to manga_like_path(@manga), method: :post, class: "btn btn-primary" do %>
+          <i class="fas fa-thumbs-up"></i> (<%= @manga.likes_count %>)
+        <% end %>
+
+        <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger" do %>
+          <i class="fas fa-thumbs-down"></i> (<%= @manga.dislikes_count %>)
+        <% end %>
+      </div>
     </div>
     <div class="col">
       <h1><%= @manga.title %></h1>
@@ -56,13 +59,11 @@
   </div>
 </div>
 
-<div class="btn-group" role="group" aria-label="Actions">
-    <%= button_to manga_like_path(@manga), method: :post, class: "btn btn-primary" do %>
-      <i class="fas fa-thumbs-up"></i> Like
-    <% end %>
 
-    <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger" do %>
-      <i class="fas fa-thumbs-down"></i> Dislike
-    <% end %>
-  </div>
 </div>
+<%= form_with(model: [@manga, Comment.new]) do |form| %>
+  <div class="mb-3">
+    <%= form.text_area :content, class: "form-control", placeholder: "Ajouter un commentaire" %>
+  </div>
+  <%= form.submit "Envoyer", class: "btn btn-primary" %>
+<% end %>
