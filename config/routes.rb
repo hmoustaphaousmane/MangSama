@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   # Routes pour les mangas
   resources :mangas do
     get 'search', on: :collection
-    resources :appreciations, only: [:create, :destroy]
-    resources :comments, only: [:index, :create, :destroy]
-    resources :favorites, only: [:create, :destroy]
+    post 'like', to: 'appreciations#like'
+    post 'dislike', to: 'appreciations#dislike'
+    resources :comments, only: [:create, :destroy]
+    resources :favorites, only: [:new, :create, :destroy]
   end
 
   # Routes pour les catégories

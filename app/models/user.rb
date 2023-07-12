@@ -20,6 +20,18 @@ class User < ApplicationRecord
 
   has_one_attached :profile_photo
 
+  def like(manga)
+    appreciation = Appreciation.find_or_initialize_by(user_id: id, manga_id: manga.id)
+    appreciation.liked = true
+    appreciation.save
+  end
+  
+  def dislike(manga)
+    appreciation = Appreciation.find_or_initialize_by(user_id: id, manga_id: manga.id)
+    appreciation.liked = false
+    appreciation.save
+  end
+  
   # Methode qui permet de se connecter avec le username
   def self.find_first_by_auth_conditions(warden_conditions) # warden_conditions est l'outil d'authentification utilisé derière devise
     conditions = warden_conditions.dup    
@@ -30,4 +42,4 @@ class User < ApplicationRecord
     end
       
   end
-end 
+end

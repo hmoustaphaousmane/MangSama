@@ -10,10 +10,10 @@
 require 'httparty'
 
 
-Statistic.destroy_all
 Character.destroy_all
 Categorization.destroy_all
 Manga.destroy_all
+Statistic.destroy_all
 Category.destroy_all
 
 
@@ -102,7 +102,7 @@ def seed_manga(mal_id)
         title: manga_data['title'],
         volumes: manga_data['volumes'],
         chapters: manga_data['chapters'],
-        author_name: authors.map { |author| author['name'] },
+        author_name: authors.map { |author| author['name'] }.join(', '),
         synopsis: manga_data['synopsis'],
         cover_image: manga_data['images']['jpg']['large_image_url']
         # Autres attributs du manga
@@ -129,7 +129,7 @@ def seed_manga(mal_id)
           Character.create!(
             manga_id: manga.id,
             name: character['name'],
-            image_url: character['images']['webp']['small_image_url'],
+            image_url: character['images']['webp']['image_url'],
             role: character_data['role']
           )
         end

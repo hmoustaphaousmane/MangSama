@@ -1,0 +1,68 @@
+<style>
+  body {
+    background-color: #212529;
+    color: #ffffff;
+  }
+
+  .card {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+
+  .card-title {
+    color: #ffffff;
+  }
+
+  .card-text {
+    color: #ffffff;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="<%= @manga.cover_image %>" class="img-fluid" alt="<%= @manga.title %>"><br>
+       <%= form_with(model: [@manga, Comment.new]) do |form| %>
+        <div class="mb-3">
+          <%= form.text_area :content, class: "form-control", placeholder: "Ajouter un commentaire" %>
+        </div>
+        <%= form.submit "Envoyer", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <div class="col">
+      <h1><%= @manga.title %></h1>
+      <p><strong>Auteur :</strong> <%= @manga.author_name %></p>
+      <p><strong>Volumes :</strong> <%= @manga.volumes %></p>
+      <p><strong>Chapitres :</strong> <%= @manga.chapters %></p>
+      <p><strong>Synopsis :</strong> <%= @manga.synopsis %></p>
+  </div>
+</div>
+
+<div class="container">
+  <h1>Personnages</h1>
+  <div class="row">
+    <% @characters.each do |character| %>
+      <div class="col-md-2">
+        <div class="card h-100">
+          <img src="<%= character.image_url %>" class="card-img-top" alt="<%= character.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= character.name %></h5>
+            <p class="card-text">Rôle : <%= character.role %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="btn-group" role="group" aria-label="Actions">
+    <%= button_to manga_like_path(@manga), method: :post, class: "btn btn-primary" do %>
+      <i class="fas fa-thumbs-up"></i> Like
+    <% end %>
+
+    <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger" do %>
+      <i class="fas fa-thumbs-down"></i> Dislike
+    <% end %>
+  </div>
+</div>
