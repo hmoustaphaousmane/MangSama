@@ -1,15 +1,30 @@
-<% if @results %>
-  <% @results.each do |manga| %>
-    <h3><%= manga['title'] %></h3>
-    <p><%= manga['synopsis'] %></p>
-    <img src="<%= manga['images']['jpg']['image_url'] %>">
-    <p>Score : <%= manga['score'] %></p>
-    <hr>
+<div class="container">
+  <h1>Liste des Mangas</h1>
+  <% if @results %>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <% @results.each do |manga| %>
+        <div class="col">
+          <div class="card">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="<%= manga['images']['jpg']['large_image_url'] %>" class="card-img-top" alt="<%= manga['title'] %>">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"><%= manga['title'] %></h5>
+                  <p class="card-text">Score: <%= manga['score'] %></p>
+                  <p class="card-text">Membres: <%= manga['members'] %></p>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted"><a href="<%= manga['url'] %>">Voir plus</a></small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>Aucun résultat trouvé.</p>
   <% end %>
-<% else %>
-  <p>Aucun résultat trouvé.</p>
-<% end %>
-
-
-
-
+</div>
