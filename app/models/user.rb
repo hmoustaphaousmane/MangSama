@@ -1,4 +1,12 @@
 class User < ApplicationRecord
+  attr_accessor :login
+
+  # Validations 
+  validates :username,
+  presence: true,
+  uniqueness: {case_sensitive: false},
+  format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,6 +20,7 @@ class User < ApplicationRecord
 
   has_one_attached :profile_photo
 
+<<<<<<< HEAD
   def like(manga)
     appreciation = Appreciation.find_or_initialize_by(user_id: id, manga_id: manga.id)
     appreciation.liked = true
@@ -26,3 +35,16 @@ class User < ApplicationRecord
   
 end
 
+=======
+  # Methode qui permet de se connecter avec le username
+  def self.find_first_by_auth_conditions(warden_conditions) # warden_conditions est l'outil d'authentification utilisé derière devise
+    conditions = warden_conditions.dup    
+    if login = conditions.delete(:login)
+      where(conditions.to_hash).where("lower(username) = :value OR lower(email) = :value", value: login.downcase).first
+    else
+      where(conditions.to_hash)
+    end
+      
+  end
+end 
+>>>>>>> f5d06d388ee37780ce17a7a9656be08f747147db
