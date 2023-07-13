@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div class="dropdown">
+  <div class="dropdown bg-dark">
     <div class="col text-end">
       <a class="dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
         <%= current_user.username %>
@@ -43,7 +43,7 @@
     </div>
   </nav>
 <% else %>
-  <div class="container">
+  <div class="container bg-dark">
     <div class="row">
       <div class="col text-end">
         <a class="btn btn-primary" href="<%= new_user_session_path %>">Login</a>
