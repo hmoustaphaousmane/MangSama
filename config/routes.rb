@@ -28,9 +28,12 @@ Rails.application.routes.draw do
   end
 
   # Routes pour les utilisateurs
-  # get 'users/:id' => 'users#show'
   resources :users, only: [:index, :show, :edit] do
-    resources :favorites, only: [:index]
+    # Route pour afficher, ajouter un manga comme favoris
+    resources :favorites, only: [:index, :new, :create]
   end
+
+  # Route pour supprimer un manga favoris
+  resources :favorites, only: [:index, :destroy]
 
 end

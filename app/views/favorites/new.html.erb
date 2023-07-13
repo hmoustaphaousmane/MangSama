@@ -1,0 +1,10 @@
+<center>
+<h2>Add favorite manga</h2>
+<%= form_with model: @favorite, url: user_favorites_path(current_user.id) do |f| %>
+  <%= f.collection_select :manga_id, Manga.all, :id, :title %>
+  <%= f.submit 'Add favorite', class: "btn btn-primary sm mx-2" %>
+<% end %>
+
+<% link_to 'Favorites', user_favorites_path %>
+
+</center>
