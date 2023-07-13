@@ -45,6 +45,8 @@
         <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger" do %>
           <i class="fas fa-thumbs-down"></i> (<%= @manga.dislikes_count %>)
         <% end %>
+        <%# <%= link_to "Add to Favorites", new_user_favorite_path, :class => "btn btn-primary sm mx-2"%>
+        <%= link_to "Add to Favorites", new_user_favorite_path(user_id: current_user.id, manga_id: @manga.id), method: :post, :class => "btn btn-primary sm mx-2"%>
       </div>
     </div>
     <div class="col">
@@ -70,20 +72,6 @@
         </div>
       </div>
     <% end %>
-  </div>
-</div>
-
-<div class="btn-group" role="group" aria-label="Actions">
-    <%= button_to manga_like_path(@manga), method: :post, class: "btn btn-primary" do %>
-      <i class="fas fa-thumbs-up"></i> Like
-    <% end %>
-
-    <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger" do %>
-      <i class="fas fa-thumbs-down"></i> Dislike
-    <% end %>
-
-    <%# <%= link_to "Add to Favorites", new_user_favorite_path, :class => "btn btn-primary sm mx-2"%>
-    <%= link_to "Add to Favorites", new_user_favorite_path(user_id: current_user.id, manga_id: @manga.id), method: :post, :class => "btn btn-primary sm mx-2"%>
   </div>
 </div>
 
