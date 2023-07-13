@@ -18,9 +18,18 @@ class MangasController < ApplicationController
         @manga = Manga.find(params[:id])
         @characters = @manga.characters.limit(12)
     end
+
+    def top_mangas
+        @top_mangas = fetch_top_mangas
+    end
+
+    def recommended
+        @recommended_mangas = fetch_mangas_recommendations
+    end
    
     private
 
+    #Rechercher un manga
     def search_manga(query)
         encoded_query = URI.encode_www_form_component(query)
         url = "https://api.jikan.moe/v4/manga?q=#{encoded_query}"
@@ -34,4 +43,30 @@ class MangasController < ApplicationController
             return nil
         end
     end
+
+    # Logique pour récupérer les top mangas
+    def fetch_top_mangas
+        url = 'https://api.jikan.moe/v4/top/manga'
+
+        response = HTTParty.get(url)
+        data = JSON.parse(response.body)
+
+        top_mangas = data['data']
+
+        top_mangas
+    end
+    
+    # Logique pour récupérer les mangas recommendés
+    def fetch_mangas_recommendations
+        url = 'https://api.jikan.moe/v4/recommendations/manga'
+
+        response = HTTParty.get(url)
+        data = JSON.parse(response.body)
+
+        top_mangas = data['data']
+
+        top_mangas
+    end
+
+
 end

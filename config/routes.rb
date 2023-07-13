@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get '/top_mangas', to: 'mangas#top_mangas'
+  get '/recommended', to: 'mangas#recommended'
+
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

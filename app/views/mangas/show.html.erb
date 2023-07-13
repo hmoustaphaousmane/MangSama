@@ -1,41 +1,58 @@
 <style>
+
   body {
-    background-color: #212529;
+    background-color: #1f1f1f;
     color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  .container p {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    margin-right: 10px;
   }
 
   .card {
     background-color: #343a40;
     color: #ffffff;
+    margin-bottom: 30px;
   }
 
   .card-title {
     color: #ffffff;
-  }
-
-  .card-text {
-    color: #ffffff;
+    margin-bottom: 20px;
   }
 </style>
-
 
 <div class="container">
   <div class="row">
     <div class="col">
       <img src="<%= @manga.cover_image %>" class="img-fluid" alt="<%= @manga.title %>"><br>
-       <%= form_with(model: [@manga, Comment.new]) do |form| %>
-        <div class="mb-3">
-          <%= form.text_area :content, class: "form-control", placeholder: "Ajouter un commentaire" %>
-        </div>
-        <%= form.submit "Envoyer", class: "btn btn-primary" %>
-      <% end %>
+      <div class="btn-group" role="group" aria-label="Actions">
+        <%= button_to manga_like_path(@manga), method: :post, class: "btn btn-primary" do %>
+          <i class="fas fa-thumbs-up"></i> (<%= @manga.likes_count %>)
+        <% end %>
+
+        <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger" do %>
+          <i class="fas fa-thumbs-down"></i> (<%= @manga.dislikes_count %>)
+        <% end %>
+      </div>
     </div>
     <div class="col">
       <h1><%= @manga.title %></h1>
       <p><strong>Auteur :</strong> <%= @manga.author_name %></p>
-      <p><strong>Volumes :</strong> <%= @manga.volumes %></p>
-      <p><strong>Chapitres :</strong> <%= @manga.chapters %></p>
-      <p><strong>Synopsis :</strong> <%= @manga.synopsis %></p>
+      <p><strong>Synopsis :</strong> <%= @manga.synopsis %></p><br>
+      <p>Pour plus d'information, <a href="<%= @manga.url %>">visiter ce site</a>.</p>
+    </div>
   </div>
 </div>
 
@@ -68,4 +85,13 @@
     <%# <%= link_to "Add to Favorites", new_user_favorite_path, :class => "btn btn-primary sm mx-2"%>
     <%= link_to "Add to Favorites", new_user_favorite_path(user_id: current_user.id, manga_id: @manga.id), method: :post, :class => "btn btn-primary sm mx-2"%>
   </div>
+</div>
+
+<div class="container">
+  <%= form_with(model: [@manga, Comment.new]) do |form| %>
+    <div class="mb-3">
+      <%= form.text_area :content, class: "form-control", placeholder: "Ajouter un commentaire" %>
+    </div>
+    <%= form.submit "Envoyer", class: "btn btn-primary" %>
+  <% end %>
 </div>

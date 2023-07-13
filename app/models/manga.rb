@@ -15,4 +15,14 @@ class Manga < ApplicationRecord
   validates :cover_image, presence: true
   validates :url, presence: true
   validates :synopsis, presence: true
+
+
+  def likes_count
+    appreciations.where(liked: true).count
+  end
+
+  def dislikes_count
+    appreciations.where(liked: false).count
+  end
+  
 end

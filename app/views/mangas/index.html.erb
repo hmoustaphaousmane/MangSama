@@ -1,56 +1,80 @@
 <style>
   body {
-    background-color: #212529;
+    background-color: #1f1f1f;
     color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+
+  .banner {
+    width: 100%;
+    height: 100vh;
+    background-color: #007bff;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .banner h1 {
+    font-size: 48px;
+    margin: 0;
+  }
+
+  .banner p {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .content {
+    padding: 50px;
   }
 
   .card {
     background-color: #343a40;
     color: #ffffff;
+    margin-bottom: 30px;
   }
 
   .card-title {
     color: #ffffff;
-  }
-
-  .card-text {
-    color: #ffffff;
+    margin-bottom: 20px;
   }
 </style>
 
-
-  <%= form_tag(search_mangas_path, method: :get) do %>
-    <div class="input-group mb-3">
-      <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un manga" %>
-      <button class="btn btn-primary" type="submit">Rechercher</button>
-    </div>
-  <% end %>
-</div>
-
-<div class="container">
-  <h1>Liste des Mangas</h1>
-
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <% @mangas.each do |manga| %>
-      <div class="col">
-        <div class="card">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="<%= manga.cover_image %>" class="img-fluid" alt="<%= manga.title %>">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= manga.title %></h5>
-                <p class="card-text">Auteur: <%= manga.author_name %></p>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted"><a href="<%= mangas_path%>/<%= manga.id %> ">Voir plus</a></small>
-          </div>
-        </div>
-      </div>
-    <% end %>
+<div class="banner">
+  <div class="container">
+    <h1>Bienvenue sur Mon Application</h1>
+    <p>Découvrez notre collection de mangas et plongez dans un univers captivant !</p>
   </div>
 </div>
 
+<div class="content">
+  <div class="container">
+    <h1>Liste des Mangas</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <% @mangas.each do |manga| %>
+        <div class="col">
+          <div class="card">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="<%= manga.cover_image %>" class="img-fluid" alt="<%= manga.title %>">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"><%= manga.title %></h5>
+                  <p class="card-text">Auteur: <%= manga.author_name %></p>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted"><a href="<%= mangas_path%>/<%= manga.id %> ">Voir plus</a></small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
