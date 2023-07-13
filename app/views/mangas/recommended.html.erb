@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Mangas Recommandés</h1>
+
+  <div class="row row-cols-1 row-cols-md-5 g-4">
+    <% @recommended_mangas.each do |manga| %>
+      <% manga['entry'].each do |entry| %>
+        <div class="col">
+          <div class="card">
+            <img src="<%= entry['images']['jpg']['large_image_url'] %>" class="card-img-top" alt="<%= manga['title'] %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= truncate(entry['title'], length: 15) %></h5>
+              <p class="card-text"><%= truncate(manga['content'], length: 40) %></p>
+              <a href="<%= entry['url'] %>" class="btn btn-primary">Voir plus</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

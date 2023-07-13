@@ -1,32 +1,3 @@
-<style>
-  body {
-    background-color: #212529;
-    color: #ffffff;
-  }
-
-  .card {
-    background-color: #343a40;
-    color: #ffffff;
-  }
-
-  .card-title {
-    color: #ffffff;
-  }
-
-  .card-text {
-    color: #ffffff;
-  }
-</style>
-
-
-  <%= form_tag(search_mangas_path, method: :get) do %>
-    <div class="input-group mb-3">
-      <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un manga" %>
-      <button class="btn btn-primary" type="submit">Rechercher</button>
-    </div>
-  <% end %>
-</div>
-
 <div class="container">
   <h1>Liste des Mangas</h1>
 

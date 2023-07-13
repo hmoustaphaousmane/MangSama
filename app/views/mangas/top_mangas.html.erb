@@ -1,0 +1,31 @@
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center table-active">Rang</th>
+        <th class="text-center table-active">Titre</th>
+        <th class="text-center table-active">Score</th>
+        <th class="text-center table-active">Lien</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @top_mangas.each do |manga| %>
+        <tr>
+          <td class="text-center"><%= manga['rank'] %></td>
+          <td>
+            <div class="d-flex align-items-center">
+              <img src="<%= manga['images']['jpg']['image_url'] %>" alt="<%= manga['title'] %>" class="img-thumbnail me-2" style="width: 100px;">
+              <div>
+                <h5><%= manga['title'] %></h5>
+                <p><strong>Type :</strong> <%= manga['type'] %></p>
+                <p><strong>Membres :</strong> <%= manga['members'] %></p>
+              </div>
+            </div>
+          </td>
+          <td class="text-center"><%= manga['score'] %></td>
+          <td class="text-center"><a href="<%= manga['url'] %>">Plus d'info</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
