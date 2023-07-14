@@ -65,12 +65,17 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title"><%= manga.title %></h5>
-                  <p class="card-text">Auteur: <%= manga.author_name %></p>
+                  <p class="card-text">Author: <%= manga.author_name %></p>
+                  <p class="card-text">
+                    <strong>Genres :</strong>
+                    <% genres = manga.categories.map(&:name) %>
+                    <%= genres.join(", ") %>
+                  </p>
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <small class="text-muted"><a href="<%= mangas_path%>/<%= manga.id %> ">Voir plus</a></small>
+              <small class="text-muted"><a href="<%= mangas_path%>/<%= manga.id %> ">See more</a></small>
             </div>
           </div>
         </div>

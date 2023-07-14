@@ -27,7 +27,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="<%= mangas_path %>">Accueil</a>
+            <a class="nav-link" href="<%= mangas_path %>">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<%= top_mangas_path %>">Top Manga</a>
@@ -41,8 +41,8 @@
         </ul>
         <%= form_tag(search_mangas_path, method: :get, class: "d-flex ms-auto") do %>
           <div class="input-group">
-            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un manga" %>
-            <button class="btn btn-outline-light" type="submit">Rechercher</button>
+            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search manga by name" %>
+            <button class="btn btn-outline-light" type="submit">Search</button>
           </div>
         <% end %>
       </div>
@@ -67,7 +67,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="<%= mangas_path %>">Accueil</a>
+            <a class="nav-link" href="<%= mangas_path %>">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<%= top_mangas_path %>">Top Manga</a>
@@ -81,8 +81,8 @@
         </ul>
         <%= form_tag(search_mangas_path, method: :get, class: "d-flex ms-auto") do %>
           <div class="input-group">
-            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un manga" %>
-            <button class="btn btn-outline-light" type="submit">Rechercher</button>
+            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search manga by name" %>
+            <button class="btn btn-outline-light" type="submit">Search</button>
           </div>
         <% end %>
       </div>

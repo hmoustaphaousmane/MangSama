@@ -12,6 +12,8 @@ require 'httparty'
 
 Character.destroy_all
 Categorization.destroy_all
+Appreciation.destroy_all
+Favorite.destroy_all
 Manga.destroy_all
 Statistic.destroy_all
 Category.destroy_all
@@ -118,8 +120,8 @@ def seed_manga(mal_id)
   
         # Création de l'instance de Categorization
         Categorization.create!(
-          manga: manga,
-          category: category
+          manga_id: manga.id,
+          category_id: category.id
         )
       end
       if manga_character_fetched
@@ -148,7 +150,7 @@ end
 
 
 # Appeler la méthode pour effectuer le seed d'un manga spécifique
-10.times do |i|
+5.times do |i|
   i += 1
   seed_manga(i) # Remplacez 21 par l'ID du manga que vous souhaitez seed
 end

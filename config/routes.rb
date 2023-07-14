@@ -22,13 +22,18 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     post 'like', to: 'appreciations#like'
     post 'dislike', to: 'appreciations#dislike'
-    resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:new, :create, :destroy]
   end
 
   # Routes pour les catégories
   resources :categories, only: [:show] do
     resources :mangas, only: [:index]
+  end
+
+  resources :mangas do
+    resources :users do
+      resources :comments, only: [:new, :create, :update, :destroy]
+    end
   end
 
   # Routes pour les utilisateurs
@@ -39,5 +44,7 @@ Rails.application.routes.draw do
 
   # Route pour supprimer un manga favoris
   resources :favorites, only: [:index, :destroy]
+
+  resources :comments, only: [:destroy]
 
 end

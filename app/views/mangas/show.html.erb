@@ -35,51 +35,80 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
-      <img src="<%= @manga.cover_image %>" class="img-fluid" alt="<%= @manga.title %>"><br>
+    <div class="col text-center border rounded p-4" style="background-color: gray;">
+      <img src="<%= @manga.cover_image %>" class="img-fluid mb-4" alt="<%= @manga.title %>">
       <div class="btn-group" role="group" aria-label="Actions">
-        <%= button_to manga_like_path(@manga), method: :post, class: "btn btn-primary" do %>
+        <%= button_to manga_like_path(@manga), method: :post, class: "btn btn-primary me-2" do %>
           <i class="fas fa-thumbs-up"></i> (<%= @manga.likes_count %>)
         <% end %>
 
-        <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger" do %>
+        <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger me-2" do %>
           <i class="fas fa-thumbs-down"></i> (<%= @manga.dislikes_count %>)
         <% end %>
-        <%# <%= link_to "Add to Favorites", new_user_favorite_path, :class => "btn btn-primary sm mx-2"%>
-        <%= link_to "Add to Favorites", new_user_favorite_path(user_id: current_user.id, manga_id: @manga.id), method: :post, :class => "btn btn-primary sm mx-2"%>
+
+        <%= link_to "Add to Favorites", new_user_favorite_path(user_id: current_user, manga_id: @manga.id), method: :post, class: "btn btn-primary sm" %>
       </div>
+      <%= form_with(model: [@manga, current_user, Comment.new]) do |form| %>
+        <div class="mt-4">
+          <%= form.text_area :content, class: "form-control", placeholder: "Put your comment here", rows: 2 %>
+        </div>
+        <%= form.submit "Send", class: "btn btn-primary mt-3" %>
+      <% end %>
     </div>
     <div class="col">
       <h1><%= @manga.title %></h1>
       <p><strong>Auteur :</strong> <%= @manga.author_name %></p>
       <p><strong>Synopsis :</strong> <%= @manga.synopsis %></p><br>
-      <p>Pour plus d'information, <a href="<%= @manga.url %>">visiter ce site</a>.</p>
+      <p>
+        <strong>Genres :</strong>
+        <% genres = @manga.categories.map(&:name) %>
+        <%= genres.join(", ") %>
+      </p><br>
+      <p>For more informations, <a href="<%= @manga.url %>">visit this website</a>.</p>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <h1>Personnages</h1>
+  <h1>Characters</h1>
   <div class="row">
-    <% @characters.each do |character| %>
-      <div class="col-md-2">
-        <div class="card h-100">
-          <img src="<%= character.image_url %>" class="card-img-top" alt="<%= character.name %>">
-          <div class="card-body">
-            <h5 class="card-title"><%= character.name %></h5>
-            <p class="card-text">Rôle : <%= character.role %></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <table class="table">
+
+      <tbody>
+        <% @characters.each_slice(2) do |characters| %>
+          <tr>
+            <% characters.each do |character| %>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="<%= character.image_url %>" alt="<%= character.name %>" class="img-thumbnail me-2" style="width: 100px;">
+                  <div>
+                    <p><strong>Name: </strong><%= character.name %></p>
+                    <p><strong>Role: </strong> <%= character.role %></p>
+                  </div>
+                </div>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
-
-<div class="container">
-  <%= form_with(model: [@manga, Comment.new]) do |form| %>
-    <div class="mb-3">
-      <%= form.text_area :content, class: "form-control", placeholder: "Ajouter un commentaire" %>
-    </div>
-    <%= form.submit "Envoyer", class: "btn btn-primary" %>
+<ul class="comments-list">
+  <% @comments.each do |comment| %>
+    <li class="comment">
+      <div class="comment-header">
+        <i class="fas fa-user-circle"></i>
+        <span class="username"><%= comment.user.username %></span>
+        <% if current_user && comment.user == current_user %>
+          <%= button_to comment_path(comment), method: :delete, class: "delete-comment" do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="comment-content">
+        <%= comment.content %>
+      </div>
+    </li>
   <% end %>
-</div>
+</ul>

@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Liste des Mangas</h1>
+  <h1>Results for manga search</h1>
   <% if @results %>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% @results.each do |manga| %>
@@ -18,13 +18,13 @@
               </div>
             </div>
             <div class="card-footer">
-              <small class="text-muted"><a href="<%= manga['url'] %>">Voir plus</a></small>
+              <small class="text-muted"><a href="<%= manga['url'] %>">See more</a></small>
             </div>
           </div>
         </div>
       <% end %>
     </div>
   <% else %>
-    <p>Aucun résultat trouvé.</p>
+    <p>Sorry, but there are no results for your search.</p>
   <% end %>
 </div>

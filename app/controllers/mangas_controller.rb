@@ -1,6 +1,9 @@
 require 'uri'
 
 class MangasController < ApplicationController
+
+    before_action :authenticate_user!, only: [:show]
+
     def index
         # Only authorize those who have read privilege on the class Mango to view
         authorize! :read, Manga
@@ -17,6 +20,8 @@ class MangasController < ApplicationController
     def show
         @manga = Manga.find(params[:id])
         @characters = @manga.characters.limit(12)
+
+        @comments = @manga.comments.includes(:user)
     end
 
     def top_mangas
