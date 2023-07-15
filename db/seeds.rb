@@ -136,17 +136,7 @@ end
 
 
 # Appeler la méthode pour effectuer le seed d'un manga spécifique
-10.times do |i|
-  i = 21 + i
-  seed_manga(i) # Remplacez 21 par l'ID du manga que vous souhaitez seed
+200.times do |i|
+  i = 300 + i
+  seed_manga(i)
 end
-
-# Vous pouvez appeler la méthode seed_manga avec différents ID de manga pour seed plusieurs mangas
-
-# Exemple : seed_manga(1)
-# Exemple : seed_manga(10)
-# Exemple : seed_manga(100)
-
-
-#category = Category.find_or_create_by(name: 'Nouvelle catégorie')
-#category.mangas.create(title: 'Nouveau manga', synopsis: 'Synopsis du nouveau manga')
