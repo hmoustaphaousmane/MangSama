@@ -57,8 +57,13 @@
     </div>
     <div class="col">
       <h1><%= @manga.title %></h1>
-      <p><strong>Auteur :</strong> <%= @manga.author_name %></p>
-      <p><strong>Synopsis :</strong> <%= @manga.synopsis %></p><br>
+      <p><strong>Author :</strong> <%= @manga.author_name %></p>
+      <p><strong>Synopsis :</strong> <%= @manga.synopsis %></p>
+      <p><strong>Plan_to_read: </strong> <%= @manga.statistic.plan_to_read %></p>
+      <p><strong>Total: </strong> <%= @manga.statistic.total %></p>
+      <p><strong>Score: </strong> <%= @manga.statistic.score %></p>
+      <p><strong>Votes: </strong> <%= @manga.statistic.votes %></p>
+      <p><strong>Percentage: </strong> <%= @manga.statistic.percentage %></p>
       <p>
         <strong>Genres :</strong>
         <% genres = @manga.categories.map(&:name) %>

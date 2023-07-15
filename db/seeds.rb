@@ -9,20 +9,6 @@
 
 require 'httparty'
 
-
-Character.destroy_all
-Categorization.destroy_all
-Appreciation.destroy_all
-Favorite.destroy_all
-Manga.destroy_all
-Statistic.destroy_all
-Category.destroy_all
-
-
-
-
-
-
 # Méthode pour récupérer les données d'un manga spécifique depuis l'API Jikan
 def fetch_manga_data(mal_id)
   url = "https://api.jikan.moe/v4/manga/#{mal_id}"
@@ -150,8 +136,8 @@ end
 
 
 # Appeler la méthode pour effectuer le seed d'un manga spécifique
-5.times do |i|
-  i += 1
+10.times do |i|
+  i = 21 + i
   seed_manga(i) # Remplacez 21 par l'ID du manga que vous souhaitez seed
 end
 
