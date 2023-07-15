@@ -12,8 +12,11 @@
         <%= button_to manga_dislike_path(@manga), method: :post, class: "btn btn-danger me-2" do %>
           <i class="fas fa-thumbs-down"></i> (<%= @manga.dislikes_count %>)
         <% end %>
-
-        <%= link_to "Add to Favorites", new_user_favorite_path(user_id: current_user, manga_id: @manga.id), method: :post, class: "btn btn-primary sm" %>
+        <% if request.referer.try(:include?, user_favorites_path(current_user.id)) %>
+          <%= button_to "Remove Favorite", favorite_path(@manga), method: :delete, data: { confirm: "Are you sure you want to remove this favorite?" }, class: "btn btn-danger sm" %>
+        <% else %>
+          <%= link_to "Add to Favorites", new_user_favorite_path(user_id: current_user, manga_id: @manga.id), method: :post, class: "btn btn-primary sm" %>
+        <% end %>
       </div>
       <%= form_with(model: [@manga, current_user, Comment.new]) do |form| %>
         <div class="mt-4">
