@@ -1,5 +1,7 @@
+<title><% content_for :page_title, "Results of search" %></title>
+
 <div class="container">
-  <h1>Liste des Mangas</h1>
+  <h1>Results for manga search</h1>
   <% if @results %>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% @results.each do |manga| %>
@@ -13,18 +15,18 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= manga['title'] %></h5>
                   <p class="card-text">Score: <%= manga['score'] %></p>
-                  <p class="card-text">Membres: <%= manga['members'] %></p>
+                  <p class="card-text">Members: <%= manga['members'] %></p>
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <small class="text-muted"><a href="<%= manga['url'] %>">Voir plus</a></small>
+              <small class="text-muted"><a href="<%= manga['url'] %>">See more</a></small>
             </div>
           </div>
         </div>
       <% end %>
     </div>
   <% else %>
-    <p>Aucun résultat trouvé.</p>
+    <p>Sorry, but there are no results for your search.</p>
   <% end %>
 </div>

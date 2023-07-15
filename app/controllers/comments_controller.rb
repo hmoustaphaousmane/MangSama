@@ -4,15 +4,28 @@ class CommentsController < ApplicationController
     def create
         @manga = Manga.find(params[:manga_id])
         @comment = @manga.comments.build(comment_params)
+        @comment.user = current_user
+        
 
-        if @comment.save
-        flash[:success] = "Commentaire créé avec succès"
+        if @comment.save!
+            redirect_to manga_path(@manga), notice: "Comment added!!!"
         else
-        flash[:error] = "Échec de la création du commentaire"
+            redirect_to manga_path(@manga), notice: "Try again, your comment ended with some issues!!!"
         end
 
-        redirect_to manga_path(@manga)
+        
     end
+
+    def destroy
+        @comment = Comment.find(params[:id])
+        if @comment.destroy
+            flash[:success] = 'Object was successfully deleted.'
+        else
+            flash[:error] = 'Something went wrong'
+        end
+
+    end
+    
 
     private
 

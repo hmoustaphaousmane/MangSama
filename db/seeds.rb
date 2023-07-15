@@ -9,18 +9,6 @@
 
 require 'httparty'
 
-
-Character.destroy_all
-Categorization.destroy_all
-Manga.destroy_all
-Statistic.destroy_all
-Category.destroy_all
-
-
-
-
-
-
 # Méthode pour récupérer les données d'un manga spécifique depuis l'API Jikan
 def fetch_manga_data(mal_id)
   url = "https://api.jikan.moe/v4/manga/#{mal_id}"
@@ -118,8 +106,8 @@ def seed_manga(mal_id)
   
         # Création de l'instance de Categorization
         Categorization.create!(
-          manga: manga,
-          category: category
+          manga_id: manga.id,
+          category_id: category.id
         )
       end
       if manga_character_fetched
@@ -148,17 +136,7 @@ end
 
 
 # Appeler la méthode pour effectuer le seed d'un manga spécifique
-10.times do |i|
-  i += 1
-  seed_manga(i) # Remplacez 21 par l'ID du manga que vous souhaitez seed
+200.times do |i|
+  i = 300 + i
+  seed_manga(i)
 end
-
-# Vous pouvez appeler la méthode seed_manga avec différents ID de manga pour seed plusieurs mangas
-
-# Exemple : seed_manga(1)
-# Exemple : seed_manga(10)
-# Exemple : seed_manga(100)
-
-
-#category = Category.find_or_create_by(name: 'Nouvelle catégorie')
-#category.mangas.create(title: 'Nouveau manga', synopsis: 'Synopsis du nouveau manga')

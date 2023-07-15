@@ -1,95 +1,72 @@
 <% if user_signed_in? %>
-  <div class="dropdown bg-dark">
-    <div class="col text-end">
-      <a class="dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        <%= current_user.username %>
-      </a>
-      <div class="btn-group">
-        <ul class="dropdown-menu" role="menu">
-          <% unless current_page?(user_path(current_user.id)) %>
-            <li><%= link_to "Profile", current_user, class: "dropdown-item" %></li>
-          <% end %>
-          <li>
-            <%= form_tag destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-              <%= submit_tag 'Log out' %>
+  <header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="<%= mangas_path %>" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+            <img src="https://cdn.discordapp.com/attachments/1100516560893906965/1129666792319623259/Manga_sama-removebg-preview.png" alt="Votre image" width="95" height="75">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="<%= mangas_path %>" class="nav-link px-2 link-secondary">Home</a></li>
+          <li><a href="<%= top_mangas_path %>" class="nav-link px-2 link-dark">Top manga</a></li>
+          <li><a href="<%= recommended_path %>" class="nav-link px-2 link-dark">Selection for you</a></li>
+        </ul>
+
+        <%= form_tag(search_mangas_path, method: :get, class: "col-12 col-lg-auto mb-3 mb-lg-0") do %>
+          <div class="input-group">
+            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search manga by name" %>
+            <button class="btn btn-outline-dark" type="submit">Search</button>
+          </div>
+        <% end %>
+
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user fa-lg"></i>
+          </a>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <% unless current_page?(user_path(current_user.id)) %>
+                <li><%= link_to "Profile", current_user, class: "dropdown-item" %></li>
             <% end %>
-          </li>
-        </ul>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <%= form_tag destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                    <%= submit_tag 'Log out' %>
+                <% end %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container">
-      <%# <a class="navbar-brand" href="<%= mangas_path >"><%= image_tag('logo.PNG', width: "15%") ></a> %>
-      <a class="navbar-brand" href="<%= mangas_path %>">MangaSama</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="<%= mangas_path %>">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= top_mangas_path %>">Top Manga</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= recommended_path %>">Recommandation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-        <%= form_tag(search_mangas_path, method: :get, class: "d-flex ms-auto") do %>
-          <div class="input-group">
-            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un manga" %>
-            <button class="btn btn-outline-light" type="submit">Rechercher</button>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </nav>
+  </header>
+
 <% else %>
-  <div class="container bg-dark">
-    <div class="row">
-      <div class="col text-end">
-        <a class="btn btn-primary" href="<%= new_user_session_path %>">Login</a>
-        <a class="btn btn-secondary" href="<%= new_user_registration_path %>">Signup</a>
-      </div>
+  <nav class="py-2 bg-light border-bottom">
+    <div class="container d-flex flex-wrap">
+      <ul class="nav me-auto">
+        <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="<%= mangas_path %>" class="nav-link link-dark px-2">Home</a></li>
+        <li class="nav-item"><a href="<%= top_mangas_path %>" class="nav-link link-dark px-2">Top manga</a></li>
+        <li class="nav-item"><a href="<%= recommended_path %>" class="nav-link link-dark px-2">Selection for you</a></li>
+      </ul>
+      <ul class="nav">
+        <li class="nav-item"><a href="<%= new_user_session_path %>" class="nav-link link-dark px-2">Login</a></li>
+        <li class="nav-item"><a href="<%= new_user_registration_path %>" class="nav-link link-dark px-2">Sign up</a></li>
+      </ul>
     </div>
-  </div>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="<%= mangas_path %>">MangaSama</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="<%= mangas_path %>">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= top_mangas_path %>">Top Manga</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= recommended_path %>">Recommandation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-        <%= form_tag(search_mangas_path, method: :get, class: "d-flex ms-auto") do %>
+  </nav>
+  
+  <header class="py-3 mb-4 border-bottom">
+      <div class="container d-flex flex-wrap justify-content-center">
+        <a href="<%= mangas_path %>" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+          <img src="https://cdn.discordapp.com/attachments/1100516560893906965/1129666792319623259/Manga_sama-removebg-preview.png" alt="Votre image" width="95" height="75">
+          <span class="fs-4">MangaSama</span>
+        </a>
+        <%= form_tag(search_mangas_path, method: :get, class: "col-12 col-lg-auto mb-3 mb-lg-0") do %>
           <div class="input-group">
-            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Rechercher un manga" %>
-            <button class="btn btn-outline-light" type="submit">Rechercher</button>
+            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search manga by name" %>
+            <button class="btn btn-outline-dark" type="submit">Search</button>
           </div>
         <% end %>
       </div>
-    </div>
-  </nav>
+  </header>
 <% end %>
-
-
-
