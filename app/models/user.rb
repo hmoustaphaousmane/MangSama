@@ -40,6 +40,11 @@ class User < ApplicationRecord
     else
       where(conditions.to_hash)
     end
-      
+  end
+
+  # Envoyer un mail à l'utilisateur après la création de son compte
+  after_create :send_welcome_mail
+  def send_welcome_mail
+    UserMailer.welcome_mail(self).deliver_now  
   end
 end
