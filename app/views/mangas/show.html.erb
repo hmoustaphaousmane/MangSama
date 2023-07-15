@@ -36,7 +36,7 @@
         <% genres = @manga.categories.map(&:name) %>
         <%= genres.join(", ") %>
       </p><br>
-      <p>For more informations, <a href="<%= @manga.url %>">visit this website</a>.</p>
+      <p>For more informations, <a class="text-decoration-none" href="<%= @manga.url %>">visit this website</a>.</p>
     </div>
   </div>
 </div>
