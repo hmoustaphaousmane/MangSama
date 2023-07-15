@@ -32,9 +32,8 @@ class FavoritesController < ApplicationController
 
   def destroy
     # @favorite = current_user.favorites.find_by(id: params[:id])
-    @favorite = Favorite.find_by(:manga_id => params[:id])
-    if @favorite
-      @favorite.destroy
+    @favorite = Favorite.find_by(user_id: current_user)
+    if @favorite.destroy
       redirect_to user_favorites_path(current_user), notice: "Favorite removed successfully"
     else
       redirect_to user_favorites_path(current_user), alert: "Favorite not found"
