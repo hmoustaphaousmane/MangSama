@@ -5,6 +5,7 @@ class FavoritesController < ApplicationController
   end
 
   def new
+    @manga = Manga.find(params[:manga_id])
     @favorite = Favorite.new
   end
 
@@ -20,8 +21,6 @@ class FavoritesController < ApplicationController
   # end
 
   def create
-    # @user = User.find(params[:user_id])
-    # @favorite = @user.favorites.build(favorite_params)
     @favorite = Favorite.new(favorite_params)
     @favorite.user = current_user
     if @favorite.save

@@ -1,10 +1,42 @@
-<center>
-<h2>Add favorite manga</h2>
-<%= form_with model: @favorite, url: user_favorites_path(current_user.id) do |f| %>
-  <%= f.collection_select :manga_id, Manga.all, :id, :title %>
-  <%= f.submit 'Add favorite', class: "btn btn-primary sm mx-2" %>
-<% end %>
+<div class="row">
 
-<% link_to 'Favorites', user_favorites_path %>
+  <div class="col-sm-2"></div>
+
+  <div class="shadow p-4 mb-5 bg-body rounded col-md-8">
+  <center>
+  <h3>Add favorite manga</h3>
+  <table class="table table-bordered table-striped table-hover">
+    <tbody>            
+      <tr class="success"> 
+        <td><strong>Title : </strong><%= @manga.title %></td>
+      </tr>            
+      <tr class="success"> 
+        <td><strong>Author : </strong><%= @manga.author_name %></td>
+      </tr>
+      <tr class="success"> 
+        <td><strong>Plan To Read : </strong><%= @manga.statistic.plan_to_read %> </strong>
+      </tr>
+      <tr class="success"> 
+        <td><strong>Total : </strong><%= @manga.statistic.total %></td>
+      </tr>
+      <tr class="success"> 
+        <td><strong>Score : </strong><%= @manga.statistic.score %></td>
+      </tr>
+      <tr class="success"> 
+        <td><strong>Votes : </strong><%= @manga.statistic.votes%></td>
+      </tr> 
+    </tbody>
+  </table>
+
+  <div class="col-12 d-flex justify-content-end mb-2">
+    <%= form_with model: @favorite, url: user_favorites_path(current_user.id) do |f| %>
+      <%= f.hidden_field :manga_id, value: @manga.id %>
+      <%= f.submit 'Add favorite', class: "btn btn-primary sm mx-2" %>
+    <% end %>
+    <%= link_to 'Go To Favorites', user_favorites_path, class: "btn btn-primary sm mx-2" %>
+  <div>
 
 </center>
+</div>
+</div>
+</div>
