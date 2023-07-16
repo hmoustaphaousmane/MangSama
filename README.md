@@ -28,7 +28,8 @@ This is an end-of-course project for the Fullstack Dev - Ruby course at [etp4a.c
 
     - Line 28: Change the password with your PostgreSQL password
       ```
-       password: postgresql_password
+      password: postgresql_password
+      ```
 
 ### Database Setup
 
@@ -64,8 +65,8 @@ This is an end-of-course project for the Fullstack Dev - Ruby course at [etp4a.c
    rails server
    ```
 
-2. In your browser, enter the following address to access the project:
+2. In your browser, enter one of the following address to access the project:
    - [http://127.0.0.1:3000](http://127.0.0.1:3000)
    - [http://[::1]:3000](http://[::1]:3000)
 
-*<u>NOTE</u>*: Make sure to replace `postgresql_username` and `postgresql_password` with your actual PostgreSQL credentials.
+**NOTE**: Make sure to replace `postgresql_username` and `postgresql_password` with your actual PostgreSQL credentials.
